@@ -3,34 +3,28 @@ package edu.craptocraft.cotxox.tarifa;
 import edu.craptocraft.cotxox.carrera.Carrera;
 
 public class Tarifa {
-    public double COSTE_MILLA = 1.35;
-    public double COSTE_MINUTO = 0.35;
-    public double COSTE_MINIMO = 5;
-    public byte PORCENTAJE_COMISION = (byte) 0.20;
 
-    public Tarifa(){}
+    private final double COSTE_MILLA = 1.35;
+    private final double COSTE_MINUTO = 0.35;
+    private final double COSTE_MINIMO = 5;
+    private final byte PORCENTAJE_COMISION = (byte) 0.20;
 
-    public double getCosteDistancia(double distancia){
-        double costeDistancia =  distancia * this.COSTE_MILLA;
-        return costeDistancia;
+
+    public double getCosteDistancia(double distancia ){
+        return distancia * this.COSTE_MILLA;
     }
 
-    public double getCosteTiempo(int tiempoCarrera){
-        double costeTiempo = tiempoCarrera * this.COSTE_MINUTO;
-        return costeTiempo;
+    public double getCosteTiempo(int minutos ){
+        return minutos * this.COSTE_MINUTO;
     }
 
     public double getCosteTotalEsperado(Carrera carrera){
-
-
-        double getCosteTotalEsperado = (getCosteDistancia(carrera.getDistancia())) + (getCosteTiempo(carrera.getTiempoEsperado())) ;
         
-        if (getCosteTotalEsperado < 5) {
-            getCosteTotalEsperado = 5;
+        if (getCosteDistancia(carrera.getDistancia()) + getCosteTiempo(carrera.getTiempoEsperado()) < this.COSTE_MINIMO) {
+            return this.COSTE_MINIMO;
+        } else {
+            return getCosteDistancia(carrera.getDistancia()) + getCosteTiempo(carrera.getTiempoEsperado());
         }
-        
-        return getCosteTotalEsperado;
 
     }
-
 }

@@ -5,19 +5,14 @@ import java.util.List;
 
 public class PoolConductores {
     
+    List<Conductor> conductores = new ArrayList<Conductor>();
 
-    public List<Conductor> poolConductores;
-
-    public PoolConductores(List<Conductor> poolConductores){
-        this.poolConductores = poolConductores;
-    }
-    
-    public List<Conductor> getPoolConductores(){
-        return this.poolConductores;
+    public PoolConductores(List<Conductor> conductores){
+        this.conductores = conductores;
     }
 
-
-
-
+    public List<Conductor> getPoolConductores() {
+        return conductores;
+    }
 
 }

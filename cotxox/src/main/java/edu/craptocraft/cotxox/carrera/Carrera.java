@@ -1,36 +1,37 @@
 package edu.craptocraft.cotxox.carrera;
 
+import java.util.Optional;
+
 import edu.craptocraft.cotxox.conductores.Conductor;
 import edu.craptocraft.cotxox.conductores.PoolConductores;
 import edu.craptocraft.cotxox.tarifa.Tarifa;
 
-public class Carrera  {
+public class Carrera {
     
     private String tarjetaCredito;
     private String origen;
     private String destino;
     private double distancia;
-    private int  tiempoEsperado;
+    private int tiempoEsperado;
     private int tiempoCarrera;
     private double costeTotal;
     private int propina;
-    public Conductor conductor;
+    private Conductor conductor;
 
     public Carrera(String tarjetaCredito){
         this.tarjetaCredito = tarjetaCredito;
     }
 
-
-    public String getTarjetaCredito(){
-        return this.tarjetaCredito;
+    public String getTarjetaCredito() {
+        return tarjetaCredito;
     }
 
-    public void setOrigen(String origen){
+    public void setOrigen(String origen) {
         this.origen = origen;
     }
 
-    public String getOrigen(){
-        return this.origen;
+    public String getOrigen() {
+        return origen;
     }
 
     public void setDestino(String destino) {
@@ -49,12 +50,13 @@ public class Carrera  {
         return distancia;
     }
 
+
     public double getCosteEsperado(){
 
-        // Nos montamos una instancia de tarifa
-        Tarifa taria = new Tarifa();
-        return taria.getCosteTotalEsperado(this);
+        Tarifa tarifa = new Tarifa();
+        return tarifa.getCosteTotalEsperado(this);
     }
+
 
     public int getTiempoEsperado() {
         return tiempoEsperado;
@@ -81,21 +83,23 @@ public class Carrera  {
     }
 
 
-    public void asignarConductor(PoolConductores poolConductores){
-        for (Conductor conductor : poolConductores.getPoolConductores()) {
-            // Tomamos un conductor que esté libre, lo asignamos a la carrera y lo ponemos ocupado
-            if (conductor.isOcupado() == false) {
-                this.setConductor(conductor);
-                this.conductor.setOcupado(true);
-                break;
-            }
-            
-        }
-
+    public void asignarConductor(PoolConductores conductores){
+        
+        Conductor conductorLibre = conductores.getPoolConductores().stream()
+                                                                .filter(conductors -> conductors.isOcupado())
+                                                                .findFirst()
+                                                                .orElse(null);
+        
+        this.conductor = conductorLibre;
     }
+
 
     public void realizarPago(double pago){
         this.costeTotal = pago;
+    }
+
+    public double getCosteTotal() {
+        return costeTotal;
     }
 
     public void recibirPropina(int propina){
@@ -106,11 +110,8 @@ public class Carrera  {
         return propina;
     }
 
-    public double getCosteTotal() {
-        return costeTotal;
-    }
-
     public void liberarConductor(){
         this.conductor.setOcupado(false);
     }
+
 }
