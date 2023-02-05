@@ -1,7 +1,5 @@
 package edu.craptocraft.cotxox.carrera;
 
-import java.util.Optional;
-
 import edu.craptocraft.cotxox.conductores.Conductor;
 import edu.craptocraft.cotxox.conductores.PoolConductores;
 import edu.craptocraft.cotxox.tarifa.Tarifa;
