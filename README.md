@@ -11,7 +11,9 @@ Enlace al examen del profesor @dfleta : https://github.com/dfleta/cotxox
 ## Metodología
 
 ### Diagrama de clases UML
-Para poder resolver el examen se debía seguir el siguiente diagrama:
+Para poder resolver el examen se debía seguir el siguiente diagrama: 
+![diagrama_clases_UML](https://user-images.githubusercontent.com/80277545/216848310-d062e16d-0907-485f-bff2-95ac680633c7.png)
+
 
 
 ### Framework
